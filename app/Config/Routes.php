@@ -15,7 +15,12 @@ $routes->post('register', 'AuthController::store');
 $routes->group('admin', function ($routes) {
     $routes->get('dashboard', 'Admin\DashboardController::index');
     $routes->get('pengguna', 'Admin\PenggunaController::index');
+
     $routes->get('dudi', 'Admin\DudiController::index');
+    $routes->post('dudi/store', 'Admin\DudiController::store');
+    $routes->post('dudi/update/(:num)', 'Admin\DudiController::update/$1');
+    $routes->get('dudi/delete/(:num)', 'Admin\DudiController::delete/$1');
+
     $routes->get('pengaturan', 'Admin\PengaturanController::index');
 });
 $routes->group('guru', function ($routes) {
