@@ -1,0 +1,45 @@
+body {
+  background: linear-gradient(135deg, #e1eaf7, #ffffff, #e1eaf7);
+  min-height: 100vh;
+}
+
+.login-card {
+  background: #e1eaf7;
+  width: 450px;
+  border-radius: 16px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.icon-circle {
+  width: 56px;
+  height: 56px;
+  background: #2f6df6;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 24px;
+}
+
+.form-control {
+  padding-left: 32px;
+}
+
+.input-icon {
+  position: absolute;
+  top: 70%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 70%;
+  right: 14px;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
