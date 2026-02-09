@@ -9,6 +9,12 @@ class AuthController extends BaseController
 {
     public function index()
     {
+        // if (session()->get('isLoggedIn')) {
+        //     return redirect()->to(
+        //         session()->get('role') . '/dashboard'
+        //     );
+        // }
+        
         return view('login');
     }
 
@@ -38,7 +44,6 @@ class AuthController extends BaseController
             'admin' => 'admin/dashboard',
             'guru'  => 'guru/dashboard',
             'siswa' => 'siswa/dashboard',
-            'dudi'  => 'dudi/dashboard',
         ];
 
         return redirect()->to(base_url($redirect[$user['role']] ?? 'login'));
@@ -69,6 +74,6 @@ class AuthController extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to(base_url('login'));
+        return redirect()->to(base_url('login'))->with('success', 'Anda telah logout');
     }
 }

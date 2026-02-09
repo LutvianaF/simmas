@@ -39,75 +39,74 @@
 
 <div class="row g-4">
 
-    <!-- MAGANG TERBARU -->
-    <div class="col-md-6">
-        <div class="card card-stat p-3">
-            <h6 class="fw-bold mb-3">Magang Terbaru</h6>
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">🎓 Magang Terbaru</div>
+            <div class="card-body">
 
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <div>
-                    <strong>Ahmad Rizki</strong><br>
-                    <small class="text-muted">PT. Teknologi Nusantara</small>
-                </div>
-                <span class="badge bg-success badge-status">Aktif</span>
-            </div>
+                <?php foreach ($magangTerbaru as $m): ?>
+                    <div class="d-flex align-items-center justify-content-between border rounded p-3 mb-3">
+                        <div>
+                            <h6 class="mb-1"><?= $m['nama_siswa']; ?></h6>
+                            <small class="text-muted"><?= $m['nama_perusahaan']; ?></small><br>
+                            <small class="text-muted">
+                                <?= date('d/m/Y', strtotime($m['tanggal_mulai'])); ?> -
+                                <?= date('d/m/Y', strtotime($m['tanggal_selesai'])); ?>
+                            </small>
+                        </div>
+                        <span class="badge bg-success text-capitalize">
+                            <?= $m['status']; ?>
+                        </span>
+                    </div>
+                <?php endforeach; ?>
 
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <strong>Siti Nurhaliza</strong><br>
-                    <small class="text-muted">CV. Digital Kreativa</small>
-                </div>
-                <span class="badge bg-success badge-status">Aktif</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- DUDI AKTIF -->
-    <div class="col-md-6">
-        <div class="card card-stat p-3">
-            <h6 class="fw-bold mb-3">DUDI Aktif</h6>
-
-            <div class="mb-2">
-                <strong>PT. Teknologi Nusantara</strong><br>
-                <small class="text-muted">Surabaya</small>
-                <span class="badge bg-primary float-end">8 siswa</span>
-            </div>
-
-            <div class="mb-2">
-                <strong>CV. Digital Kreativa</strong><br>
-                <small class="text-muted">Surabaya</small>
-                <span class="badge bg-primary float-end">5 siswa</span>
-            </div>
-
-            <div>
-                <strong>PT. Inovasi Mandiri</strong><br>
-                <small class="text-muted">Surabaya</small>
-                <span class="badge bg-primary float-end">12 siswa</span>
             </div>
         </div>
     </div>
 
-    <!-- LOGBOOK -->
-    <div class="col-12">
-        <div class="card card-stat p-3">
-            <h6 class="fw-bold mb-3">Logbook Terbaru</h6>
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">🏢 DUDI Aktif</div>
+            <div class="card-body">
 
-            <div class="mb-2">
-                <strong>Memperbarui sistem database</strong><br>
-                <small class="text-muted">Disetujui</small>
-                <span class="badge bg-success float-end">Disetujui</span>
+                <?php foreach ($dudiAktif as $d): ?>
+                    <div class="mb-3">
+                        <strong><?= $d['nama_perusahaan']; ?></strong>
+                        <div class="text-muted small"><?= $d['alamat']; ?></div>
+                        <div class="text-muted small"><?= $d['telepon']; ?></div>
+                    </div>
+                <?php endforeach; ?>
+
             </div>
+        </div>
+    </div>
 
-            <div class="mb-2">
-                <strong>Membuat desain mockup website</strong><br>
-                <small class="text-muted">Menunggu</small>
-                <span class="badge bg-warning float-end">Pending</span>
-            </div>
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">📘 Logbook Terbaru</div>
+            <div class="card-body">
 
-            <div>
-                <strong>Training keamanan sistem</strong><br>
-                <small class="text-muted">Ditolak</small>
-                <span class="badge bg-danger float-end">Ditolak</span>
+                <?php foreach ($logbookTerbaru as $l): ?>
+                    <div class="border rounded p-3 mb-3">
+                        <div class="fw-semibold"><?= $l['kegiatan']; ?></div>
+                        <small class="text-muted">
+                            <?= date('d/m/Y', strtotime($l['tanggal'])); ?>
+                        </small>
+
+                        <div class="mt-2 text-warning small">
+                            Kendala: <?= $l['kendala'] ?: 'Tidak ada'; ?>
+                        </div>
+
+                        <?php if ($l['status_verifikasi'] == 'disetujui'): ?>
+                            <span class="badge bg-success mt-2">Disetujui</span>
+                        <?php elseif ($l['status_verifikasi'] == 'pending'): ?>
+                            <span class="badge bg-warning mt-2">Pending</span>
+                        <?php else: ?>
+                            <span class="badge bg-danger mt-2">Ditolak</span>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+
             </div>
         </div>
     </div>

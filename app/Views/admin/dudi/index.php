@@ -8,7 +8,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <small>Total DUDI</small>
-                    <h3><?= $total ?></h3>
+                    <h3><?= $totalDudi ?></h3>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <small>Total Siswa Magang</small>
-                    <h3>55</h3>
+                    <h3><?= $totalMagang ?></h3>
                 </div>
             </div>
         </div>
@@ -47,6 +47,16 @@
                 + Tambah DUDI
             </button>
         </div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-lock input-icon"></i>
+                <input type="search" name="" id="" placeholder="Cari perusahaan, alamat, penanggung jawab...">
+            </div>
+            <div>
+                <span>Tampilkan:</span>
+                <input type="text">
+            </div>
+        </div>
 
         <div class="card-body table-responsive">
             <table class="table align-middle">
@@ -56,6 +66,7 @@
                         <th>Kontak</th>
                         <th>Penanggung Jawab</th>
                         <th>Status</th>
+                        <th>Siswa Magang</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -63,7 +74,7 @@
                     <?php foreach ($dudi as $row): ?>
                         <tr>
                             <td>
-                                <strong><?= $row['nama'] ?></strong><br>
+                                <strong><?= $row['nama_perusahaan'] ?></strong><br>
                                 <small class="text-muted"><?= $row['alamat'] ?></small>
                             </td>
                             <td>
@@ -74,6 +85,11 @@
                             <td>
                                 <span class="badge <?= $row['status'] == 'Aktif' ? 'bg-success' : 'bg-danger' ?>">
                                     <?= $row['status'] ?>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">
+                                    <?= $row['total_siswa_magang']; ?> siswa
                                 </span>
                             </td>
                             <td>

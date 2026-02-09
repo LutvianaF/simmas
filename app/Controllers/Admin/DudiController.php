@@ -4,25 +4,38 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\DudiModel;
+use App\Models\MagangModel;
 
 class DudiController extends BaseController
 {
     protected $dudi;
+    protected $magang;
 
     public function __construct()
     {
         $this->dudi = new DudiModel();
+        $this->magang = new MagangModel();
     }
 
     public function index()
     {
         $data = [
-            'title'     => 'Manajemen DUDI',
-            'total'     => $this->dudi->countAllResults(),
-            'aktif'     => $this->dudi->where('status', 'aktif')->countAllResults(),
-            'nonaktif'  => $this->dudi->where('status', 'nonaktif')->countAllResults(),
-            'dudi'      => $this->dudi->findAll(),
+            'title'         => 'Manajemen DUDI',
+            'totalDudi'     => $this->dudi->countAllResults(),
+            'totalMagang'   => $this->magang->countAllResults(),
+            'aktif'         => $this->dudi->where('status', 'aktif')->countAllResults(),
+            'nonaktif'      => $this->dudi->where('status', 'nonaktif')->countAllResults(),
+            'dudi'          => $this->dudi->findAll(),
         ];
+
+        $data['dudi'] = $this->dudi
+            ->select('
+            dudi.*,
+            COUNT(magang.id) as total_siswa_magang
+        ')
+            ->join('magang', 'magang.dudi_id = dudi.id', 'left')
+            ->groupBy('dudi.id')
+            ->findAll();
 
         return view('admin/dudi/index', $data);
     }

@@ -108,7 +108,7 @@
                     <li class="nav-item d-flex align-items-center gap-2">
                         <i class="bi bi-person"></i>
                         <div class="text-start">
-                            <div class="fw-semibold">**nama siswa**</div>
+                            <div class="fw-semibold"><?= esc($namaSiswa) ?></div>
                             <small class="text-muted">Siswa</small>
                         </div>
                     </li>
