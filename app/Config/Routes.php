@@ -29,7 +29,6 @@ $routes->group('admin', function ($routes) {
 
     $routes->get('pengaturan', 'Admin\PengaturanController::index');
     $routes->post('pengaturan/update/(:num)', 'Admin\PengaturanController::update/$1');
-
 });
 $routes->group('guru', function ($routes) {
     $routes->get('dashboard', 'Guru\DashboardController::index');
@@ -42,12 +41,16 @@ $routes->group('guru', function ($routes) {
     $routes->get('magang/edit/(:num)', 'Guru\MagangController::edit/$1');
     $routes->post('magang/update/(:num)', 'Guru \MagangController::update/$1');
     $routes->get('magang/delete/(:num)', 'Guru\MagangController::delete/$1');
-    
+
     $routes->get('jurnal', 'Guru\JurnalController::index');
 });
 $routes->group('siswa', function ($routes) {
     $routes->get('dashboard', 'Siswa\DashboardController::index');
+
     $routes->get('dudi', 'Siswa\DudiController::index');
+    $routes->get('dudi/detail/(:num)', 'Siswa\DudiController::detail/$1');
+    $routes->get('dudi/daftar/(:num)', 'Siswa\DudiController::daftar/$1');
+
     $routes->get('magang', 'Siswa\MagangController::index');
     $routes->get('jurnal', 'Siswa\JurnalController::index');
 });

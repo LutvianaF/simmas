@@ -95,10 +95,13 @@
                         <td>
                             <?php
                             $badge = match ($m['status']) {
-                                'aktif'   => 'success',
-                                'selesai' => 'primary',
-                                'pending' => 'warning',
-                                default   => 'secondary'
+                                'pending'      => 'warning',
+                                'diterima'     => 'info',
+                                'berlangsung'  => 'success',
+                                'selesai'      => 'primary',
+                                'ditolak'      => 'danger',
+                                'dibatalkan'   => 'secondary',
+                                default        => 'secondary',
                             };
                             ?>
                             <span class="badge bg-<?= $badge; ?>">

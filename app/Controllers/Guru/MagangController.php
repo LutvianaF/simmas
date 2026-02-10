@@ -27,26 +27,44 @@ class MagangController extends BaseController
 
     public function index()
     {
-        $guruId = session()->get('guru_id'); 
+        $userId = session()->get('user_id');
+
+        $guru = $this->guru->where('user_id', $userId)->first();
+
+        if (!$guru) {
+            return redirect()->back()->with('error', 'Data guru tidak ditemukan');
+        }
+
+        $guruId = $guru['id'];
 
         $data['total'] = $this->magang
             ->where('guru_id', $guruId)
-            ->countAllResults();
-
-        $data['aktif'] = $this->magang
-            ->where('guru_id', $guruId)
-            ->where('status', 'aktif')
-            ->countAllResults();
-
-        $data['selesai'] = $this->magang
-            ->where('guru_id', $guruId)
-            ->where('status', 'selesai')
-            ->countAllResults();
+            ->countAllResults(true);
 
         $data['pending'] = $this->magang
             ->where('guru_id', $guruId)
-            ->where('status', 'pending')
-            ->countAllResults();
+            ->where('status', MagangModel::STATUS_PENDING)
+            ->countAllResults(true);
+
+        $data['aktif'] = $this->magang
+            ->where('guru_id', $guruId)
+            ->whereIn('status', [MagangModel::STATUS_DITERIMA, MagangModel::STATUS_BERLANGSUNG])
+            ->countAllResults(true);
+
+        $data['selesai'] = $this->magang
+            ->where('guru_id', $guruId)
+            ->where('status', MagangModel::STATUS_SELESAI)
+            ->countAllResults(true);
+
+        $data['ditolak'] = $this->magang
+            ->where('guru_id', $guruId)
+            ->where('status', MagangModel::STATUS_DITOLAK)
+            ->countAllResults(true);
+
+        $data['dibatalkan'] = $this->magang
+            ->where('guru_id', $guruId)
+            ->where('status', MagangModel::STATUS_DIBATALKAN)
+            ->countAllResults(true);
 
         $data['magang'] = $this->magang
             ->select('

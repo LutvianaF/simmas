@@ -19,30 +19,40 @@ class JurnalController extends BaseController
 
     public function index()
     {
-        $guruId = session()->get('guru_id');
+        $userId = session()->get('user_id');
 
+        $guru = (new \App\Models\GuruModel())
+            ->where('user_id', $userId)
+            ->first();
+
+        if (!$guru) {
+            return redirect()->back()->with('error', 'Data guru tidak ditemukan');
+        }
+
+        $guruId = $guru['id'];
+        
         $data['total'] = $this->logbook
             ->join('magang', 'magang.id = logbook.magang_id')
             ->where('magang.guru_id', $guruId)
-            ->countAllResults();
+            ->countAllResults(true);
 
         $data['belum'] = $this->logbook
             ->join('magang', 'magang.id = logbook.magang_id')
             ->where('magang.guru_id', $guruId)
             ->where('status_verifikasi', 'pending')
-            ->countAllResults();
+            ->countAllResults(true);
 
         $data['disetujui'] = $this->logbook
             ->join('magang', 'magang.id = logbook.magang_id')
             ->where('magang.guru_id', $guruId)
             ->where('status_verifikasi', 'disetujui')
-            ->countAllResults();
+            ->countAllResults(true);
 
         $data['ditolak'] = $this->logbook
             ->join('magang', 'magang.id = logbook.magang_id')
             ->where('magang.guru_id', $guruId)
             ->where('status_verifikasi', 'ditolak')
-            ->countAllResults();
+            ->countAllResults(true);
 
         $data['logbook'] = $this->logbook
             ->select('

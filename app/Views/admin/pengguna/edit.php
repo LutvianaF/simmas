@@ -2,45 +2,59 @@
 <?= $this->section('content') ?>
 
 <div class="container mt-4">
-    <h4 class="fw-bold mb-3">Edit Pengguna</h4>
+    <h4 class="fw-bold">Edit User</h4>
+    <small>Perbarui informasi user</small>
 
-    <div class="card p-3 shadow-sm">
+    <div class="card p-3 card-hero-dash modal-content mt-3">
         <form action="<?= base_url('admin/pengguna/update/' . $user['id']) ?>" method="post">
-            <div class="mb-2">
-                <label class="form-label">Nama</label>
+            <!-- Nama Lengkap -->
+            <div class="mb-3">
+                <label class="form-label">Nama Lengkap *</label>
                 <input type="text" name="name"
                     value="<?= esc($user['name']) ?>"
-                    class="form-control" required>
+                    class="form-control" placeholder="Masukkan nama lengkap" required>
             </div>
 
-            <div class="mb-2">
-                <label class="form-label">Email</label>
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email *</label>
                 <input type="email" name="email"
                     value="<?= esc($user['email']) ?>"
-                    class="form-control" required>
+                    class="form-control" placeholder="Contoh: user@email.com" required>
             </div>
 
-            <div class="mb-2">
-                <label class="form-label">Password</label>
-                <input type="password" name="password"
-                    class="form-control"
-                    placeholder="Kosongkan jika tidak diubah">
-            </div>
-
+            <!-- Role -->
             <div class="mb-3">
-                <label class="form-label">Role</label>
-                <select name="role" class="form-control" required>
+                <label class="form-label">Role *</label>
+                <select name="role" class="form-select" required>
                     <option value="admin" <?= $user['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
                     <option value="guru" <?= $user['role'] == 'guru' ? 'selected' : '' ?>>Guru</option>
                     <option value="siswa" <?= $user['role'] == 'siswa' ? 'selected' : '' ?>>Siswa</option>
                 </select>
             </div>
 
-            <button class="btn btn-primary">Simpan Perubahan</button>
-            <a href="<?= base_url('admin/pengguna') ?>"
-                class="btn btn-secondary">
-                Kembali
-            </a>
+            <!-- Catatan Password -->
+            <div class="mb-3 bg-pw">
+                <small class="text-primary">
+                    <b>Catatan:</b>
+                    Untuk mengubah password, silakan gunakan fitur reset password terpisah.
+                </small>
+            </div>
+
+            <!-- Verifikasi Email -->
+            <div class="mb-3">
+                <label class="form-label">Email Verification *</label>
+                <select name="email_verified" class="form-select" required>
+                    <option value="0" selected>Unverified</option>
+                    <option value="1">Verified</option>
+                </select>
+            </div>
+
+            <!-- Tombol -->
+            <div class="d-flex justify-content-end modal-footer">
+                <a href="<?= base_url('admin/pengguna') ?>" class="btn btn-secondary me-2">Batal</a>
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            </div>
         </form>
     </div>
 </div>

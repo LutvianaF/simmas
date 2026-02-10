@@ -43,4 +43,11 @@ class MagangModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public const STATUS_PENDING     = 'pending';
+    public const STATUS_DITERIMA    = 'diterima';
+    public const STATUS_DITOLAK     = 'ditolak';
+    public const STATUS_BERLANGSUNG = 'berlangsung';
+    public const STATUS_SELESAI     = 'selesai';
+    public const STATUS_DIBATALKAN  = 'dibatalkan';
 }

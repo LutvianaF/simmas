@@ -88,11 +88,11 @@
             </li>
 
             <hr class="sidebar-divider mt-auto">
-            <div class="sidebar-footer d-flex align-items-center gap-2">
+            <div class="sidebar-footer d-flex align-items-center gap-2 mb-3">
                 <i class="bi bi-record-fill"></i>
                 <div>
                     <div class="fw-semibold">SMK Negeri 1 Ampelgading</div>
-                    <small class="text-muted"> Sistem Pelaporan v1.0</small>
+                    <small class="text-white"> Sistem Pelaporan v1.0</small>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
                 </div>
                 <ul class="navbar-nav ms-auto align-items-center">
 
-                    <li class="nav-item d-flex align-items-center gap-2">
+                    <li class="nav-item d-flex align-items-center">
                         <i class="bi bi-person"></i>
                         <div class="text-start">
                             <div class="fw-semibold">Admin Sistem</div>

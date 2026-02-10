@@ -17,7 +17,15 @@ class PenggunaController extends BaseController
 
     public function index()
     {
-        $data['users'] = $this->user->findAll();
+        $perPage = 10;
+
+        $users = $this->user->paginate($perPage, 'users');
+
+        $data = [
+            'users' => $users,
+            'pager' => $this->user->pager,
+        ];
+
         return view('admin/pengguna/index', $data);
     }
 

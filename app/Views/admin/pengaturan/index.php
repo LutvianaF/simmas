@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <div class="container mt-4">
-    <h4 class="fw-bold mb-3">Pengaturan Sekolah</h4>
+    <h4 class="fw-bold mb-3"> Pengaturan Sekolah</h4>
 
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success">
@@ -14,15 +14,15 @@
 
         <!-- KIRI: FORM -->
         <div class="col-md-6">
-            <div class="card p-3 shadow-sm">
-                <h6 class="fw-bold mb-3">Informasi Sekolah</h6>
+            <div class="card p-3 card-hero-dash">
+                <h6 class="fw-bold mb-3"><i class="bi bi-gear fs-5 icon-purple"></i> Informasi Sekolah</h6>
 
                 <form action="<?= base_url('admin/pengaturan/update/' . $sekolah['id']) ?>"
                     method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
 
                     <div class="mb-2">
-                        <label class="form-label">Logo Sekolah</label>
+                        <label class="form-label"><i class="bi bi-upload"></i> Logo Sekolah</label>
                         <input type="file" name="logo" class="form-control">
                     </div>
 
@@ -83,7 +83,7 @@
 
         <!-- KANAN: PREVIEW -->
         <div class="col-md-6">
-            <div class="card p-3 shadow-sm mb-3">
+            <div class="card p-3 card-hero-dash mb-3">
                 <h6 class="fw-bold">Preview Tampilan</h6>
                 <p class="text-muted small">Pratinjau informasi sekolah</p>
 
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 shadow-sm mb-3">
+            <div class="card p-3 card-hero-dash mb-3">
                 <h6 class="fw-bold">Dashboard Header</h6>
 
                 <div class="preview-soft">
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 shadow-sm">
+            <div class="card p-3 card-hero-dash">
                 <h6 class="fw-bold">Header Rapor / Sertifikat</h6>
 
                 <div class="rapor-box mt-3">
@@ -152,7 +152,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 shadow-sm mb-3">
+            <div class="card p-3 card-hero-dash mb-3">
                 <h6 class="fw-bold mb-3">Dokumen Cetak</h6>
 
                 <div class="d-flex gap-3">
@@ -175,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 shadow-sm"
+            <div class="card p-3 card-hero-dash"
                 style="background:#f3f8ff;border:1px solid #e3ecff;">
                 <h6 class="fw-bold mb-3 text-primary">Informasi Penggunaan</h6>
 
