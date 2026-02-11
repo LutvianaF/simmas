@@ -63,7 +63,7 @@ $statusClass = [
 
     <div class="col-lg-8">
         <div class="card card-hero-dash">
-            <div class="card-header fw-bold"><i class="bi bi-mortarboard text-primary"></i> Magang Terbaru</div>
+            <div class="card-header fw-bold"><i class="bi bi-mortarboard icon-purple"></i> Magang Terbaru</div>
             <div class="card-body">
 
                 <?php foreach ($magangTerbaru as $m): ?>
@@ -96,11 +96,26 @@ $statusClass = [
             <div class="card-body">
 
                 <?php foreach ($dudiAktif as $d): ?>
-                    <div class="mb-3">
-                        <strong><?= $d['nama_perusahaan']; ?></strong>
-                        <div class="text-muted small"><i class="bi bi-geo-alt me-2"></i><?= $d['alamat']; ?></div>
-                        <div class="text-muted small"><i class="bi bi-telephone me-2"></i><?= $d['telepon']; ?></div>
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <strong><?= esc($d['nama_perusahaan']); ?></strong>
+
+                            <div class="text-muted small">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <?= esc($d['alamat']); ?>
+                            </div>
+
+                            <div class="text-muted small">
+                                <i class="bi bi-telephone me-2"></i>
+                                <?= esc($d['telepon']); ?>
+                            </div>
+                        </div>
+
+                        <span class="badge badge-primary">
+                            <?= isset($d['total_siswa_aktif']) ? $d['total_siswa_aktif'] : 0 ?> siswa
+                        </span>
                     </div>
+
                 <?php endforeach; ?>
 
             </div>

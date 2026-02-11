@@ -4,7 +4,7 @@ body {
 }
 
 .login-card {
-  background: #e1eaf7;
+  background: #f8e9f0; /*warna*/
   width: 450px;
   border-radius: 16px;
   border: none;
@@ -14,7 +14,7 @@ body {
 .icon-circle {
   width: 56px;
   height: 56px;
-  background: #2f6df6;
+  background: #6a1e55; /*warna*/
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -28,12 +28,17 @@ body {
   padding-left: 32px;
 }
 
+.form-control:focus {
+  box-shadow: none;
+  border-color: #6a1e55; /*warna*/
+}
+
 .input-icon {
   position: absolute;
   top: 70%;
   left: 14px;
   transform: translateY(-50%);
-  color: #9ca3af;
+  color: #6a1e55;
 }
 
 .toggle-icon {
@@ -41,5 +46,17 @@ body {
   top: 70%;
   right: 14px;
   transform: translateY(-50%);
-  color: #9ca3af;
+  color: #6a1e55;
+}
+
+.btn-login {
+  background: #6a1e55; /*warna*/
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-login:hover {
+  background: #6a1e55; /*warna*/
+  color: #fff;
+  transition: background 0.3s ease;
 }

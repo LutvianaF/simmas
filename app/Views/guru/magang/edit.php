@@ -47,7 +47,15 @@
         <div class="col-md-6">
             <label>Status</label>
             <select name="status" class="form-select">
-                <?php foreach (['pending', 'aktif', 'selesai'] as $st): ?>
+                <?php
+                $statuses = [
+                    \App\Models\MagangModel::STATUS_PENDING,
+                    \App\Models\MagangModel::STATUS_BERLANGSUNG,
+                    \App\Models\MagangModel::STATUS_SELESAI,
+                ];
+                ?>
+
+                <?php foreach ($statuses as $st): ?>
                     <option value="<?= $st; ?>"
                         <?= $magang['status'] == $st ? 'selected' : ''; ?>>
                         <?= ucfirst($st); ?>

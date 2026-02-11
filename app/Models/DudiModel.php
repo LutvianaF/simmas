@@ -43,4 +43,14 @@ class DudiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getSiswaAktif()
+    {
+        return $this->db->table('dudi AS d')
+            ->select('d.*, COALESCE(COUNT(m.id),0) AS total_siswa_aktif')
+            ->join('magang AS m', 'm.dudi_id = d.id AND m.status = "aktif"', 'left')
+            ->groupBy('d.id')
+            ->get()
+            ->getResultArray();
+    }
 }

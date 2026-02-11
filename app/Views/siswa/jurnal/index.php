@@ -1,7 +1,13 @@
 <?= $this->extend('siswa/template/template') ?>
 <?= $this->section('content') ?>
 
-<h4 class="mb-4">Jurnal Harian Magang</h4>
+
+<div class="d-flex">
+    <h4 class="mb-4">Jurnal Harian Magang</h4>
+    <a href="<?= base_url('siswa/jurnal/create') ?>" class="btn btn-primary mb-4">
+        <i class="bi bi-plus-lg"></i> Tambah Jurnal
+    </a>
+</div>
 
 <?php if (($statistik['total'] ?? 0) == 0): ?>
     <div class="alert alert-warning d-flex justify-content-between align-items-center">
@@ -75,7 +81,6 @@
                         </td>
                     </tr>
                 <?php endif ?>
-
                 <?php foreach ($logbook as $row): ?>
                     <tr>
                         <td>
@@ -83,29 +88,128 @@
                                 ? date('d M Y', strtotime($row['tanggal']))
                                 : '-' ?>
                         </td>
+
                         <td>
                             <strong>Kegiatan:</strong><br>
-                            <?= esc($row['kegiatan']) ?><br>
+                            <?= esc(substr($row['kegiatan'], 0, 80)) ?>...
                             <?php if ($row['kendala']): ?>
-                                <strong>Kendala:</strong> <?= esc($row['kendala']) ?>
+                                <br><strong>Kendala:</strong> <?= esc($row['kendala']) ?>
                             <?php endif ?>
                         </td>
+
                         <td>
                             <?php if ($row['status_verifikasi'] == 'disetujui'): ?>
                                 <span class="badge bg-success">Disetujui</span>
                             <?php elseif ($row['status_verifikasi'] == 'ditolak'): ?>
                                 <span class="badge bg-danger">Ditolak</span>
                             <?php else: ?>
-                                <span class="badge bg-warning">Menunggu</span>
+                                <span class="badge bg-warning text-dark">Menunggu</span>
                             <?php endif ?>
                         </td>
+
                         <td>
-                            <?= $row['catatan_guru'] ?? '<em>Belum ada feedback</em>' ?>
+                            <?= !empty($row['catatan_guru'])
+                                ? esc($row['catatan_guru'])
+                                : '<em>Belum ada feedback</em>' ?>
                         </td>
+
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary">Detail</a>
+                            <!-- BUTTON DETAIL -->
+                            <button
+                                class="btn btn-sm btn-outline-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#detailModal<?= $row['id'] ?>">
+                                Detail
+                            </button>
+
+                            <?php if ($row['status_verifikasi'] != 'disetujui'): ?>
+                                <a href="<?= base_url('siswa/jurnal/edit/' . $row['id']) ?>"
+                                    class="btn btn-sm btn-outline-secondary">
+                                    Edit
+                                </a>
+
+                                <a href="<?= base_url('siswa/jurnal/delete/' . $row['id']) ?>"
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Yakin ingin menghapus jurnal ini?')">
+                                    Hapus
+                                </a>
+                            <?php endif ?>
                         </td>
                     </tr>
+
+                    <!-- ================= MODAL DETAIL ================= -->
+                    <div class="modal fade" id="detailModal<?= $row['id'] ?>" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                                <!-- HEADER -->
+                                <div class="modal-header">
+                                    <div>
+                                        <h5 class="modal-title mb-0">Detail Jurnal Harian</h5>
+                                        <small class="text-muted">
+                                            <?= date('l, d F Y', strtotime($row['tanggal'])) ?>
+                                        </small>
+                                    </div>
+
+                                    <?php if ($row['status_verifikasi'] == 'disetujui'): ?>
+                                        <span class="badge bg-success ms-2">Disetujui</span>
+                                    <?php elseif ($row['status_verifikasi'] == 'ditolak'): ?>
+                                        <span class="badge bg-danger ms-2">Ditolak</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-warning text-dark ms-2">Menunggu</span>
+                                    <?php endif ?>
+
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- BODY -->
+                                <div class="modal-body">
+
+                                    <h6 class="fw-bold">Kegiatan Hari Ini</h6>
+                                    <div class="p-3 border rounded bg-light mb-3">
+                                        <?= nl2br(esc((string)$row['kegiatan'])) ?>
+                                    </div>
+
+                                    <?php if (!empty($row['kendala'])): ?>
+                                        <h6 class="fw-bold">Kendala</h6>
+                                        <div class="p-3 border rounded bg-light mb-3">
+                                            <?= nl2br(esc((string)$row['kendala'])) ?>
+                                        </div>
+                                    <?php endif ?>
+
+                                    <?php if (!empty($row['file'])): ?>
+                                        <h6 class="fw-bold">Dokumentasi</h6>
+                                        <div class="p-3 border rounded bg-success bg-opacity-10 
+                                d-flex justify-content-between align-items-center mb-3">
+                                            <span><?= esc((string)$row['file']) ?></span>
+                                            <a href="<?= base_url('uploads/jurnal/' . $row['file']) ?>"
+                                                class="btn btn-success btn-sm"
+                                                download>
+                                                Unduh
+                                            </a>
+                                        </div>
+                                    <?php endif ?>
+
+                                    <?php if (!empty($row['catatan_guru'])): ?>
+                                        <h6 class="fw-bold text-success">Catatan Guru</h6>
+                                        <div class="p-3 border rounded bg-success bg-opacity-10">
+                                            <?= nl2br(esc((string)$row['catatan_guru'])) ?>
+                                        </div>
+                                    <?php endif ?>
+
+                                </div>
+
+                                <!-- FOOTER -->
+                                <div class="modal-footer text-muted small d-flex justify-content-between w-100">
+                                    <span>Dibuat: <?= date('d/m/Y', strtotime($row['created_at'])) ?></span>
+                                    <span>Diperbarui: <?= date('d/m/Y', strtotime($row['updated_at'])) ?></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ================= END MODAL ================= -->
+
                 <?php endforeach ?>
             </tbody>
         </table>

@@ -55,7 +55,7 @@
                         </span>
                     </div>
 
-                    <button class="btn btn-primary w-100 py-2 rounded-pill">
+                    <button class="btn btn-login w-100 py-2 rounded-pill">
                         Sign In
                     </button>
                 </form>

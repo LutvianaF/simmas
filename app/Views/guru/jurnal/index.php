@@ -81,11 +81,10 @@
                         </td>
                     </tr>
 
-                    <!-- MODAL VERIFIKASI -->
                     <div class="modal fade" id="verifikasi<?= $l['id'] ?>">
                         <div class="modal-dialog">
                             <form method="post"
-                                action="<?= base_url('guru/logbook/verifikasi/' . $l['id']) ?>">
+                                action="<?= base_url('guru/jurnal/verifikasi/' . $l['id']) ?>">
                                 <?= csrf_field() ?>
                                 <div class="modal-content">
                                     <div class="modal-header">

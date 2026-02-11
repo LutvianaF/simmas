@@ -51,6 +51,8 @@ class DashboardController extends BaseController
             ->limit(3)
             ->findAll();
 
+        $data['dudi'] = $this->dudiModel->getSiswaAktif();
+
         return view('admin/dashboard/index', $data);
     }
 }

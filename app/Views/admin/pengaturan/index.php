@@ -34,20 +34,20 @@
                     </div>
 
                     <div class="mb-2">
-                        <label class="form-label">Alamat Lengkap</label>
+                        <label class="form-label"><i class="bi bi-geo-alt"></i> Alamat Lengkap</label>
                         <textarea name="alamat"
                             class="form-control"><?= esc($sekolah['alamat'] ?? '') ?></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-2">
-                            <label class="form-label">Telepon</label>
+                            <label class="form-label"><i class="bi bi-telephone"></i> Telepon</label>
                             <input type="text" name="telepon"
                                 value="<?= esc($sekolah['telepon'] ?? '') ?>"
                                 class="form-control">
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label">Email</label>
+                            <label class="form-label"><i class="bi bi-envelope"></i> Email</label>
                             <input type="email" name="email"
                                 value="<?= esc($sekolah['email'] ?? '') ?>"
                                 class="form-control">
@@ -55,14 +55,14 @@
                     </div>
 
                     <div class="mb-2">
-                        <label class="form-label">Website</label>
+                        <label class="form-label"><i class="bi bi-globe2"></i> Website</label>
                         <input type="text" name="website"
                             value="<?= esc($sekolah['website'] ?? '') ?>"
                             class="form-control">
                     </div>
 
                     <div class="mb-2">
-                        <label class="form-label">Kepala Sekolah</label>
+                        <label class="form-label"><i class="bi bi-person"></i> Kepala Sekolah</label>
                         <input type="text" name="kepala_sekolah"
                             value="<?= esc($sekolah['kepala_sekolah'] ?? '') ?>"
                             class="form-control">
