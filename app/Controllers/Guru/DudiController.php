@@ -20,21 +20,27 @@ class DudiController extends BaseController
 
     public function index()
     {
-        $data = [
-            'title'         => 'Manajemen DUDI',
-            'totalDudi'     => $this->dudi->countAllResults(),
-            'totalMagang'   => $this->magang->countAllResults(),
-            'dudi'          => $this->dudi->findAll(),
-        ];
+        $perPage = 5;
 
-        $data['dudi'] = $this->dudi
+        $builder = $this->dudi
             ->select('
             dudi.*,
             COUNT(magang.id) as total_siswa_magang
         ')
             ->join('magang', 'magang.dudi_id = dudi.id', 'left')
-            ->groupBy('dudi.id')
-            ->findAll();
+            ->groupBy('dudi.id');
+
+        $dudi  = $builder->paginate($perPage, 'dudi');
+        $pager = $this->dudi->pager;
+
+        $data = [
+            'dudi'        => $dudi,
+            'pager'       => $pager,
+            'per_page'    => $perPage,
+            'title'       => 'Manajemen DUDI',
+            'totalDudi'   => $this->dudi->countAll(),
+            'totalMagang' => $this->magang->countAll(),
+        ];
 
         return view('guru/dudi/index', $data);
     }

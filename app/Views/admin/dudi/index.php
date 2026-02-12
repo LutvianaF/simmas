@@ -189,7 +189,7 @@
 
                 <!-- Pagination (auto-hide) -->
                 <?php if ($total > $perPage): ?>
-                    <?= $pager->links('dudi', 'bootstrap_pagination') ?>
+                    <?= $pager->links('dudi', 'default_full') ?>
                 <?php endif; ?>
 
             </div>

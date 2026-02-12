@@ -9,12 +9,6 @@ class AuthController extends BaseController
 {
     public function index()
     {
-        // if (session()->get('isLoggedIn')) {
-        //     return redirect()->to(
-        //         session()->get('role') . '/dashboard'
-        //     );
-        // }
-        
         return view('login');
     }
 
@@ -32,6 +26,7 @@ class AuthController extends BaseController
                 ->with('error', 'Email atau password salah');
         }
 
+        session()->regenerate(true);
         session()->set([
             'user_id'    => $user['id'],
             'name'       => $user['name'],

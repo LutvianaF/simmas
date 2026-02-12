@@ -5,55 +5,98 @@
 
 <div class="row g-3 mb-4">
     <div class="col-md-3">
-        <div class="card shadow-sm">
+        <div class="card card-stat">
             <div class="card-body">
-                <small>Total Siswa</small>
-                <h3><?= $total; ?></h3>
+                <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                    <small class="text-muted">Total Siswa</small>
+                    <i class="bi bi-people"></i>
+                </div>
+                <h3 class="fw-bold value"><?= $total; ?></h3>
                 <small class="text-muted">Siswa magang terdaftar</small>
             </div>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card shadow-sm">
+        <div class="card card-stat">
             <div class="card-body">
-                <small>Aktif</small>
-                <h3><?= $aktif; ?></h3>
+                <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                    <small class="text-muted">Aktif</small>
+                    <i class="bi bi-gear fs-5"></i>
+                </div>
+                <h3 class="fw-bold value"><?= $aktif ?></h3>
                 <small class="text-muted">Sedang magang</small>
             </div>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card shadow-sm">
+        <div class="card card-stat">
             <div class="card-body">
-                <small>Selesai</small>
-                <h3><?= $selesai; ?></h3>
+                <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                    <small class="text-muted">Selesai</small>
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <h3 class="fw-bold value"><?= $selesai; ?></h3>
                 <small class="text-muted">Magang selesai</small>
             </div>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card shadow-sm">
+        <div class="card card-stat">
             <div class="card-body">
-                <small>Pending</small>
-                <h3><?= $pending; ?></h3>
+                <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                    <small class="text-muted">Pending</small>
+                    <i class="bi bi-clock"></i>
+                </div>
+                <h3 class="fw-bold value"><?= $pending; ?></h3>
                 <small class="text-muted">Menunggu penempatan</small>
             </div>
         </div>
     </div>
 </div>
-<div class="card shadow-sm">
+<div class="card card-hero-dash">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <strong>Daftar Siswa Magang</strong>
-        <a href="<?= base_url('guru/magang/create'); ?>" class="btn btn-primary btn-sm">
+        <strong><i class="bi bi-gear fs-5 icon-purple"></i> Daftar Siswa Magang</strong>
+        <a href="<?= base_url('guru/magang/create'); ?>" class="btn btn-dudi">
             + Tambah
         </a>
     </div>
+    <div class="card-body d-flex w-50">
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="search"
+                id="searchDudi"
+                class="form-control"
+                placeholder="Cari perusahaan, alamat, penanggung jawab...">
+        </div>
+    </div>
+    <div class="card-body pb-0 d-flex justify-content-between mb-3">
+        <div class="d-flex">
+            <label class="me-2"><i class="bi bi-funnel"></i></label>
+            <select id="roleFilter" class="form-select form-select-sm" style="width:auto;">
+                <option value="">Semua role</option>
+                <option value="nama_siswa">Nama</option>
+                <option value="nama_perusahaan">Dudi</option>
+                <option value="status">Status</option>
+            </select>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="me-2">Tampilkan:</span>
+            <select class="form-select form-select-sm me-1" style="width:auto;">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+            </select>
+            <span>entri</span>
+        </div>
+    </div>
 
     <div class="card-body p-0">
-        <table class="table table-hover align-middle mb-0">
+        <table class="table table-hover align-middle mb-0 table-hover">
             <thead class="table-light">
                 <tr>
                     <th>Siswa</th>
@@ -65,9 +108,9 @@
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="dudiTable userTable">
                 <?php foreach ($magang as $m): ?>
-                    <tr>
+                    <tr data-role="<?= $m['status'] ?>">
                         <td>
                             <strong><?= $m['nama_siswa']; ?></strong><br>
                             <small class="text-muted">
@@ -126,4 +169,30 @@
     </div>
 </div>
 
+<script>
+    document.getElementById('searchDudi').addEventListener('keyup', function() {
+        const keyword = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#dudiTable tr');
+
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(keyword) ? '' : 'none';
+        });
+    });
+</script>
+<script>
+    document.getElementById('roleFilter').addEventListener('change', function() {
+        const selectedRole = this.value;
+        const rows = document.querySelectorAll('#userTable tr');
+
+        rows.forEach(row => {
+            const role = row.getAttribute('data-role');
+            if (!selectedRole || status === selectedRole) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 <?= $this->endSection() ?>

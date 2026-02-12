@@ -12,7 +12,7 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('register', 'AuthController::register');
 $routes->post('register', 'AuthController::store');
 
-$routes->group('admin', function ($routes) {
+$routes->group('admin', ['filter' => ['auth:admin', 'nocache']], function ($routes) {
     $routes->get('dashboard', 'Admin\DashboardController::index');
 
     $routes->get('pengguna', 'Admin\PenggunaController::index');
@@ -30,7 +30,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('pengaturan', 'Admin\PengaturanController::index');
     $routes->post('pengaturan/update/(:num)', 'Admin\PengaturanController::update/$1');
 });
-$routes->group('guru', function ($routes) {
+$routes->group('guru', ['filter' => ['auth:guru', 'nocache']], function ($routes) {
     $routes->get('dashboard', 'Guru\DashboardController::index');
 
     $routes->get('dudi', 'Guru\DudiController::index');
@@ -45,7 +45,7 @@ $routes->group('guru', function ($routes) {
     $routes->get('jurnal', 'Guru\JurnalController::index');
     $routes->post('jurnal/verifikasi/(:num)', 'Guru\JurnalController::verifikasi/$1');
 });
-$routes->group('siswa', function ($routes) {
+$routes->group('siswa', ['filter' => ['auth:siswa', 'nocache']], function ($routes) {
     $routes->get('dashboard', 'Siswa\DashboardController::index');
 
     $routes->get('dudi', 'Siswa\DudiController::index');

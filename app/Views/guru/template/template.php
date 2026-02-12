@@ -88,7 +88,7 @@
             </li>
 
             <hr class="sidebar-divider mt-auto">
-            <div class="sidebar-footer d-flex align-items-center gap-2">
+            <div class="sidebar-footer d-flex align-items-center gap-2 mb-3">
                 <i class="bi bi-record-fill"></i>
                 <div>
                     <div class="fw-semibold">SMK Negeri 1 Ampelgading</div>

@@ -6,38 +6,55 @@
 <!-- STATISTIK -->
 <div class="row g-3 mb-4">
     <div class="col-md-3">
-        <div class="card p-3">
-            <small>Total Logbook</small>
-            <h4><?= $total ?></h4>
+        <div class="card p-3 card-stat">
+            <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                <small class="text-muted">Total Logbook</small>
+                <i class="bi bi-people"></i>
+            </div>
+            <h3 class="fw-bold value"><?= $total ?></h3>
+            <small>Laporan harian terdaftar</small>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card p-3">
-            <small>Belum Diverifikasi</small>
-            <h4><?= $belum ?></h4>
+        <div class="card p-3 card-stat">
+            <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                <small class="text-muted">Belum Diverifikasi</small>
+                <i class="bi bi-clock"></i>
+            </div>
+            <h3 class="fw-bold value"><?= $belum ?></h3>
+            <small>Menunggu verifikasi</small>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card p-3">
-            <small>Disetujui</small>
-            <h4><?= $disetujui ?></h4>
+        <div class="card p-3 card-stat">
+            <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                <small class="text-muted">Disetujui</small>
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <h3 class="fw-bold value"><?= $disetujui ?></h3>
+            <small>Sudah diverifikasi</small>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card p-3">
-            <small>Ditolak</small>
-            <h4><?= $ditolak ?></h4>
+        <div class="card p-3 card-stat">
+            <div class="d-flex align-items-center justify-content-between mb-3 card-dash">
+                <small class="text-muted">Ditolak</small>
+                <i class="bi bi-x-circle"></i>
+            </div>
+            <h3 class="fw-bold value"><?= $ditolak ?></h3>
+            <small>Perlu perbaikan</small>
         </div>
     </div>
 </div>
 
 <!-- TABEL -->
-<div class="card">
-    <div class="card-body">
+<div class="card card-hero-dash">
+    <div class="card-header">
         <h6 class="mb-3">Daftar Logbook Siswa</h6>
-
-        <table class="table table-hover align-middle">
-            <thead>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table align-middle table-hover">
+            <thead class="table-light">
                 <tr>
                     <th>Siswa & Tanggal</th>
                     <th>Kegiatan & Kendala</th>
@@ -80,37 +97,35 @@
                             </button>
                         </td>
                     </tr>
-
-                    <div class="modal fade" id="verifikasi<?= $l['id'] ?>">
-                        <div class="modal-dialog">
-                            <form method="post"
-                                action="<?= base_url('guru/jurnal/verifikasi/' . $l['id']) ?>">
-                                <?= csrf_field() ?>
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h6>Verifikasi Logbook</h6>
-                                    </div>
-                                    <div class="modal-body">
-                                        <select name="status" class="form-select mb-2">
-                                            <option value="disetujui">Disetujui</option>
-                                            <option value="ditolak">Ditolak</option>
-                                        </select>
-                                        <textarea name="catatan_guru"
-                                            class="form-control"
-                                            placeholder="Catatan guru..."><?= $l['catatan_guru'] ?></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 </div>
+<?php foreach ($logbook as $l): ?>
+    <div class="modal fade" id="verifikasi<?= $l['id'] ?>" tabindex="-1">
+        <div class="modal-dialog">
+            <form method="post" action="<?= base_url('guru/jurnal/verifikasi/' . $l['id']) ?>">
+                <?= csrf_field() ?>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6>Verifikasi Logbook</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select name="status" class="form-select mb-2">
+                            <option value="disetujui" <?= $l['status_verifikasi'] == 'disetujui' ? 'selected' : '' ?>>Disetujui</option>
+                            <option value="ditolak" <?= $l['status_verifikasi'] == 'ditolak' ? 'selected' : '' ?>>Ditolak</option>
+                        </select>
+                        <textarea name="catatan_guru" class="form-control" placeholder="Catatan guru..."><?= esc($l['catatan_guru']) ?></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 <?= $this->endSection() ?>

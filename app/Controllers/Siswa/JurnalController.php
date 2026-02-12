@@ -53,6 +53,17 @@ class JurnalController extends BaseController
             return redirect()->back()->with('error', 'Magang tidak ditemukan.');
         }
 
+        $jamSekarang = date('H:i');
+        $batasMulai  = '07:00';
+        $batasAkhir  = '14:00';
+
+        if ($jamSekarang < $batasMulai || $jamSekarang > $batasAkhir) {
+            return redirect()->back()->with(
+                'error',
+                'Pengisian jurnal hanya diperbolehkan pukul 07:00 - 18:00'
+            );
+        }
+
         return view('siswa/jurnal/create', [
             'magang_id' => $magang['id']
         ]);

@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Auth implements FilterInterface
+class NoCache implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,19 +25,9 @@ class Auth implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('login');
-        }
-
-        // Cek role jika ada argument
-        if ($arguments) {
-            $role = session()->get('role');
-
-            if (!in_array($role, $arguments)) {
-                return redirect()->to('/unauthorized');
-            }
-        }
+        //
     }
+
     /**
      * Allows After filters to inspect and modify the response
      * object as needed. This method does not allow any way
@@ -52,6 +42,8 @@ class Auth implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        $response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+        $response->setHeader('Pragma', 'no-cache');
+        $response->setHeader('Expires', '0');
     }
 }

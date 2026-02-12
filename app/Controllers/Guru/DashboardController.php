@@ -43,14 +43,17 @@ class DashboardController extends BaseController
 
         $data['dudiAktif'] = $this->dudiModel
             ->where('status', 'aktif')
-            ->findAll();
-
+            ->orderBy('created_at', 'DESC')
+            ->findAll(5);
+            
         $data['logbookTerbaru'] = $this->logbookModel
             ->select('logbook.*, magang.id as magang_id')
             ->join('magang', 'magang.id = logbook.magang_id')
             ->orderBy('logbook.tanggal', 'DESC')
             ->limit(3)
             ->findAll();
+
+        $data['dudi'] = $this->dudiModel->getSiswaAktif();
 
         return view('guru/dashboard/index', $data);
     }

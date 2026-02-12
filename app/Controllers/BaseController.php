@@ -58,14 +58,10 @@ abstract class BaseController extends Controller
             // Share ke semua view
             Services::renderer()->setVar('namaSiswa', $this->namaSiswa);
         }
+
+        // $this->response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+        // $this->response->setHeader('Pragma', 'no-cache');
+        // $this->response->setHeader('Expires', '0');
     }
 
-    // protected function setNoCache()
-    // {
-    //     $this->response
-    //         ->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
-    //         ->setHeader('Cache-Control', 'post-check=0, pre-check=0', false)
-    //         ->setHeader('Pragma', 'no-cache')
-    //         ->setHeader('Expires', '0');
-    // }
 }

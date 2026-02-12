@@ -47,6 +47,7 @@ body {
   right: 14px;
   transform: translateY(-50%);
   color: #6a1e55;
+  cursor: pointer;
 }
 
 .btn-login {
@@ -59,4 +60,39 @@ body {
   background: #6a1e55; /*warna*/
   color: #fff;
   transition: background 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        max-width: 380px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+
+    .login-card {
+        max-width: 100%;
+        border-radius: 12px;
+        padding: 10px;
+    }
+
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    .card-body {
+        padding: 20px 15px;
+    }
+
+    .position-relative .input-icon,
+    .toggle-icon {
+        top: 36px;
+    }
 }

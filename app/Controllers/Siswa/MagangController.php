@@ -14,7 +14,7 @@ class MagangController extends BaseController
     {
         $this->magang  = new MagangModel();
     }
-    
+
     public function index()
     {
         $db = Database::connect();
